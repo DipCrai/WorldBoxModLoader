@@ -1,3 +1,6 @@
+# WorldBoxModLoader
+WorldBoxModLoader is a tool for loading mods into the WorldBox game. It allows users to install and use mods easily and quickly, enhancing the gaming experience.
+
 # Links
 - [Latest release](https://github.com/DipCrai/WorldBoxModLoader/releases)
 
