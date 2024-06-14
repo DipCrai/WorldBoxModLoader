@@ -8,4 +8,4 @@
 - Launch "WorldBoxModLoaderInstaller.exe"
 - In selection menu select WorldBox directory
 
-Please note that the use of mods may affect the stability of the game and may violate the terms of use of some games. Use mods at your own risk.
+Please note that the use of mods may affect the stability of the game. Use mods at your own risk.
