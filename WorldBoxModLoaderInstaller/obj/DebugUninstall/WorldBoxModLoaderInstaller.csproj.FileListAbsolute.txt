@@ -1,0 +1,8 @@
+D:\dev\WorldBoxModLoaderInstaller\bin\DebugUninstall\WorldBoxModLoaderInstaller.exe.config
+D:\dev\WorldBoxModLoaderInstaller\bin\DebugUninstall\WorldBoxModLoaderInstaller.exe
+D:\dev\WorldBoxModLoaderInstaller\bin\DebugUninstall\WorldBoxModLoaderInstaller.pdb
+D:\dev\WorldBoxModLoaderInstaller\obj\DebugUninstall\WorldBoxModLoaderInstaller.csproj.AssemblyReference.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\DebugUninstall\WorldBoxModLoaderInstaller.csproj.SuggestedBindingRedirects.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\DebugUninstall\WorldBoxModLoaderInstaller.csproj.CoreCompileInputs.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\DebugUninstall\WorldBoxModLoaderInstaller.exe
+D:\dev\WorldBoxModLoaderInstaller\obj\DebugUninstall\WorldBoxModLoaderInstaller.pdb

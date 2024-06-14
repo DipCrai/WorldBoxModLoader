@@ -1,0 +1,8 @@
+D:\dev\WorldBoxModLoaderInstaller\bin\Release\WorldBoxModLoaderInstaller.exe.config
+D:\dev\WorldBoxModLoaderInstaller\bin\Release\WorldBoxModLoaderInstaller.exe
+D:\dev\WorldBoxModLoaderInstaller\bin\Release\WorldBoxModLoaderInstaller.pdb
+D:\dev\WorldBoxModLoaderInstaller\obj\Release\WorldBoxModLoaderInstaller.csproj.AssemblyReference.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\Release\WorldBoxModLoaderInstaller.csproj.SuggestedBindingRedirects.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\Release\WorldBoxModLoaderInstaller.csproj.CoreCompileInputs.cache
+D:\dev\WorldBoxModLoaderInstaller\obj\Release\WorldBoxModLoaderInstaller.exe
+D:\dev\WorldBoxModLoaderInstaller\obj\Release\WorldBoxModLoaderInstaller.pdb
