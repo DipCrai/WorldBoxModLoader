@@ -1,0 +1,1 @@
+{"ModName":"multiplayer mod","Author":"DipCrai","Description":"","Version":"1.0","Scripts":["Mod.cs","Multiplayer.cs","WindowDrawer.cs"],"EntryPoint":"MultiplayerMod.Mod","MetaLocation":"D:\\SteamLibrary\\steamapps\\common\\worldbox\\Mods\\MultiplayerMod\\","MetaPath":"D:\\SteamLibrary\\steamapps\\common\\worldbox\\ModCompilations\\DipCrai-multiplayer-mod-v1.0.dll"}
