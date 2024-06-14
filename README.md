@@ -5,5 +5,5 @@
 
 # Installation
 - Unzip WorldBoxModLoader archive to the empty folder
-- Launch "WorldBoxModLoaderInstaller"
+- Launch "WorldBoxModLoaderInstaller.exe"
 - In selection menu select WorldBox directory
