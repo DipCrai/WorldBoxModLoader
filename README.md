@@ -1,4 +1,3 @@
-# WorldBoxModLoader
 Download: [latest release](https://github.com/DipCrai/WorldBoxModLoader/releases)
 
 # Installation
