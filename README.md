@@ -7,8 +7,7 @@ WorldBoxModLoader is a tool for loading mods into the WorldBox game. It allows u
 - [Wiki](https://github.com/DipCrai/WorldBoxModLoader/wiki)
 
 # Installation
-- Unzip WorldBoxModLoader archive to the empty folder
-- Launch `WorldBoxModLoaderInstaller.exe`
-- In selection menu select WorldBox directory
+- Download `WorldBoxModLoader.dll` and `WorldBoxModLoader.pdb`
+- Put downloaded files into `GAMEDIRECTORY/worldbox_Data/StreamingAssets/mods` folder
 
 Please note that the use of mods may affect the stability of the game. Use mods at your own risk.
