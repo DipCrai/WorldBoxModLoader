@@ -16,17 +16,28 @@ namespace WorldBoxModLoader
 {
     public class ModCompiler
     {
-        public static List<ModConstants> LoadedMods = new List<ModConstants>();
+        public static List<ModConstants> LoadedMods { get; private set; } = new List<ModConstants>();
+        private static string worldBoxDirectory;
+        private static string worldBoxDataDirectory;
+        private static string streamingAssetsDirectory;
         private static string[] defaultReferences = new string[] { };
 
         public static void Awake()
         {
-            defaultReferences = Directory.GetFiles(@"worldbox_Data\Managed\", "*.dll");
-            if (!Directory.Exists("Mods"))
-                Directory.CreateDirectory("Mods");
-            if (!Directory.Exists("ModCompilations"))
-                Directory.CreateDirectory("ModCompilations");
-            string[] modDirectories = Directory.GetDirectories(Path.GetFullPath("Mods"));
+            worldBoxDataDirectory = Application.dataPath;
+            worldBoxDirectory = Path.GetDirectoryName(worldBoxDataDirectory);
+            defaultReferences = Directory.GetFiles(worldBoxDataDirectory + @"\Managed\", "*.dll");
+            var newRefs = defaultReferences.Append(Path.GetFullPath(worldBoxDataDirectory + "\\StreamingAssets\\mods\\WorldBoxModLoader.dll")).ToArray();
+            defaultReferences = newRefs;
+            Debug.LogWarning(Path.GetFullPath(worldBoxDirectory + "\\worldbox_Data\\StreamingAssets\\mods\\WorldBoxModLoader.dll"));
+            var modsDir = worldBoxDirectory + "\\Mods";
+            var compilationsDir = worldBoxDirectory + "\\ModCompilations";
+
+            if (!Directory.Exists(modsDir))
+                Directory.CreateDirectory(modsDir);
+            if (!Directory.Exists(compilationsDir))
+                Directory.CreateDirectory(compilationsDir);
+            string[] modDirectories = Directory.GetDirectories(modsDir);
             if (modDirectories.Length == 0)
                 return;
             foreach (string modDirectory in modDirectories)
