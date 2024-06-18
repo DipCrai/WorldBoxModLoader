@@ -85,19 +85,6 @@ namespace WorldBoxModLoader
                 return audioClip;
             }
         }
-        public static PowerButton CreateWindowButton([NotNull] string buttonName, [NotNull] string windowName, Sprite buttonIcon)
-        {
-            PowerButton prefab = Utils.FindResource<PowerButton>("worldlaws");
-            PowerButton button = Object.Instantiate(prefab);
-
-            button.name = buttonName;
-            button.icon.sprite = buttonIcon;
-            button.open_window_id = windowName;
-            button.type = PowerButtonType.Window;
-            button.gameObject.SetActive(true);
-
-            return button;
-        }
         public static PowerButton CreateSimplePowerButton([NotNull] string buttonName, UnityAction buttonAction, Sprite buttonIcon)
         {
             PowerButton prefab = Utils.FindResource<PowerButton>("worldlaws");
@@ -109,18 +96,6 @@ namespace WorldBoxModLoader
             button.gameObject.SetActive(true);
 
             if (buttonAction != null) button.GetComponent<Button>().onClick.AddListener(buttonAction);
-
-            return button;
-        }
-        public static PowerButton CreateGodPowerButton(string buttonName, Sprite buttonIcon)
-        {
-            PowerButton prefab = Utils.FindResource<PowerButton>("inspect");
-            PowerButton button = Object.Instantiate(prefab);
-
-            button.name = buttonName;
-            button.icon.sprite = buttonIcon;
-            button.open_window_id = null;
-            button.type = PowerButtonType.Active;
 
             return button;
         }
@@ -139,15 +114,6 @@ namespace WorldBoxModLoader
                 $"CanvasBottom/BottomElements/BottomElementsMover/CanvasScrollView/Scroll View/Viewport/Content/buttons/{tabName}");
 
             return tabTransform == null ? null : tabTransform.GetComponent<PowersTab>();
-        }
-        public static ScrollWindow CreateEmptyWindow(string windowName)
-        {
-            ScrollWindow window = Object.Instantiate(Resources.Load<ScrollWindow>("windows/empty"),
-            CanvasMain.instance.transformWindows);
-            window.screen_id = windowName;
-            window.name = windowName;
-
-            return window;
         }
     }
 }
