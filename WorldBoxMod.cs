@@ -1,14 +1,7 @@
-﻿using DG.Tweening.Plugins.Core.PathCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 using WorldBoxModLoader.ModAPI;
 using Path = System.IO.Path;
 
@@ -33,33 +26,39 @@ namespace WorldBoxModLoader
         private void Initialize()
         {
             InitFileSystem();
+            initialized = true;
+            ModCompiler.Awake();
+            SetupModsTab();
+        }
+
+        private void SetupModsTab()
+        {
             PowersTab tab = Utils.CreateTab("Mods", "Mods", UtilsInternal.GetIcon());
             PowerButton disableAllMods = Utils.CreateSimplePowerButton("Disable all mods", ModLoader.DisableAllMods, UtilsInternal.LoadManifestSprite("DisableAll.png"));
             PowerButton enableAllMods = Utils.CreateSimplePowerButton("Enable all mods", ModLoader.EnableAllMods, UtilsInternal.LoadManifestSprite("EnableAll.png"));
             Utils.AddButtonToTab(disableAllMods, tab, new Vector2(118, 18));
             Utils.AddButtonToTab(enableAllMods, tab, new Vector2(118, -18));
-            initialized = true;
-            ModCompiler.Awake();
             foreach (ModConstants mod in ModCompiler.CompiledMods)
             {
                 PowerButton modButton = UtilsInternal.CreateModPowerButton(mod.ModName, ModLoader.ToggleMod, UtilsInternal.LoadSprite(Path.Combine(mod.MetaLocation, "icon.png")), mod);
                 Utils.AddButtonToTab(modButton, tab, newPosition);
                 if (ModCompiler.CompiledMods.IndexOf(mod) % 2 == 0)
                     newPosition = new Vector2(newPosition.x, -18);
-                else 
+                else
                     newPosition = new Vector2(newPosition.x + 36, 18);
             }
         }
 
-        private static void InitFileSystem()
+        private void InitFileSystem()
         {
             if (!Directory.Exists(Paths.WBMLAssembliesPath))
             {
                 Directory.CreateDirectory(Paths.WBMLAssembliesPath);
-                ExtractAssemblies();
             }
-            else
-                LoadAssemblies();
+
+            ExtractAssemblies();
+            LoadAssemblies();
+
             void ExtractAssemblies()
             {
                 var resources = ModAssembly.GetManifestResourceNames();
@@ -73,6 +72,8 @@ namespace WorldBoxModLoader
                         using var stream = ModAssembly.GetManifestResourceStream(resource);
                         using var file = new FileStream(file_path, FileMode.Create, FileAccess.Write);
                         stream.CopyTo(file);
+                        stream.Dispose();
+                        file.Dispose();
                     }
                 }
             }
