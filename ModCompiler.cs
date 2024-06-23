@@ -70,7 +70,7 @@ namespace WorldBoxModLoader
 
             foreach (string script in scripts)
             {
-                string fullPath = Path.GetFullPath(modDirectory + script);
+                string fullPath = Path.GetFullPath(modDirectory + script.Replace("/", @"\"));
                 if (File.Exists(fullPath))
                 {
                     string file = File.ReadAllText(fullPath);

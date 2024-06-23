@@ -7,6 +7,7 @@ namespace WorldBoxModLoader
 {
     internal static class Paths
     {
+        public static readonly string WBMLModPath = Assembly.GetExecutingAssembly().Location;
         public static readonly string StreamingAssetsPath = Combine(Application.streamingAssetsPath);
         public static readonly string NativeModsPath = Combine(StreamingAssetsPath, "Mods");
         public static readonly string WBMLPath = Combine(NativeModsPath, "WBML");
