@@ -6,6 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using WorldBoxModLoader.ModAPI;
 using Object = UnityEngine.Object;
 
 namespace WorldBoxModLoader
@@ -13,8 +14,6 @@ namespace WorldBoxModLoader
     internal static class UtilsInternal
     {
         private static Sprite modIcon;
-        private static Sprite enableAll;
-        private static Sprite disableAll;
 
         public static void Provide(string modDirectory, out ModConstants modConstantsObject)
         {
@@ -75,13 +74,16 @@ namespace WorldBoxModLoader
             modIcon = icon;
             return icon;
         }
-        public static PowerButton CreateModPowerButton([NotNull] string buttonId, UnityAction<ModConstants> buttonAction, Sprite buttonIcon, ModConstants modConstants)
+        public static PowerButton CreateModPowerButton([NotNull] string buttonId, UnityAction<ModConstants> buttonAction, Sprite buttonIcon, ModConstants modConstants, string description = "")
         {
             PowerButton prefab = UtilsInternal.FindResource<PowerButton>("worldlaws");
             PowerButton button = Object.Instantiate(prefab);
             ModPowerButton mbutton = button.gameObject.AddComponent<ModPowerButton>();
-            mbutton.ModConstants = modConstants;
+            TipButton tipButton = button.gameObject.GetOrAddComponent<TipButton>();
 
+            tipButton.textOnClick = buttonId;
+            tipButton.textOnClickDescription = description;
+            mbutton.ModConstants = modConstants;
             button.name = buttonId;
             button.icon.sprite = buttonIcon;
             button.type = PowerButtonType.Library;
@@ -114,6 +116,13 @@ namespace WorldBoxModLoader
             texture.filterMode = filterMode;
             texture.wrapMode = TextureWrapMode.Clamp;
             return texture;
+        }
+        public static ModConstants RecognizeMod(string directory)
+        {
+            if (!File.Exists(Path.Combine(directory, "mod.json")))
+                Debug.LogWarning("No mod.json in " + directory);
+            Provide(directory, out ModConstants mod);
+            return mod;
         }
     }
 }

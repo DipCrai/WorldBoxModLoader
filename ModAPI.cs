@@ -95,11 +95,14 @@ namespace WorldBoxModLoader
                     return audioClip;
                 }
             }
-            public static PowerButton CreateSimplePowerButton([NotNull] string buttonId, UnityAction buttonAction, Sprite buttonIcon)
+            public static PowerButton CreateSimplePowerButton([NotNull] string buttonId, UnityAction buttonAction, Sprite buttonIcon, string buttonDescription = "")
             {
                 PowerButton prefab = UtilsInternal.FindResource<PowerButton>("worldlaws");
                 PowerButton button = Object.Instantiate(prefab);
+                TipButton tipButton = button.gameObject.GetOrAddComponent<TipButton>();
 
+                tipButton.textOnClick = buttonId;
+                tipButton.textOnClickDescription = buttonDescription;
                 button.name = buttonId;
                 button.icon.sprite = buttonIcon;
                 button.type = PowerButtonType.Library;
@@ -125,12 +128,12 @@ namespace WorldBoxModLoader
                 transform.localScale = Vector3.one;
                 tab.powerButtons.Add(button);
             }
-            public static ScrollWindow CreateEmptyWindow(string pWindowID, string pWindowTitleKey)
+            public static ScrollWindow CreateEmptyWindow(string windowID, string windowTitleKey)
             {
                 ScrollWindow window = Object.Instantiate(Resources.Load<ScrollWindow>("windows/empty"),
                     CanvasMain.instance.transformWindows);
-                window.screen_id = pWindowID;
-                window.name = pWindowID;
+                window.screen_id = windowID;
+                window.name = windowID;
 
                 return window;
             }
@@ -180,6 +183,14 @@ namespace WorldBoxModLoader
 
                 tab.gameObject.SetActive(true);
                 return tab;
+            }
+            public static T GetOrAddComponent<T>(this GameObject go) where T : Component
+            {
+                T type = go.GetComponent<T>();
+                if (type != null)
+                    return type;
+                type = go.AddComponent<T>();
+                return type;
             }
         }
         public static class PowersTabNames

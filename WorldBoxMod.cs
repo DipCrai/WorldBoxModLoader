@@ -34,13 +34,19 @@ namespace WorldBoxModLoader
         private void SetupModsTab()
         {
             PowersTab tab = Utils.CreateTab("Mods", "Mods", UtilsInternal.GetIcon());
-            PowerButton disableAllMods = Utils.CreateSimplePowerButton("Disable all mods", ModLoader.DisableAllMods, UtilsInternal.LoadManifestSprite("DisableAll.png"));
-            PowerButton enableAllMods = Utils.CreateSimplePowerButton("Enable all mods", ModLoader.EnableAllMods, UtilsInternal.LoadManifestSprite("EnableAll.png"));
+
+            PowerButton disableAllMods = Utils.CreateSimplePowerButton("Disable all mods", ModLoader.DisableAllMods, 
+                UtilsInternal.LoadManifestSprite("DisableAll.png"), "Disables all mods");
+            PowerButton enableAllMods = Utils.CreateSimplePowerButton("Enable all mods", ModLoader.EnableAllMods, 
+                UtilsInternal.LoadManifestSprite("EnableAll.png"), "Enables all mods");
+
             Utils.AddButtonToTab(disableAllMods, tab, new Vector2(118, 18));
             Utils.AddButtonToTab(enableAllMods, tab, new Vector2(118, -18));
+
             foreach (ModConstants mod in ModCompiler.CompiledMods)
             {
-                PowerButton modButton = UtilsInternal.CreateModPowerButton(mod.ModName, ModLoader.ToggleMod, UtilsInternal.LoadSprite(Path.Combine(mod.MetaLocation, "icon.png")), mod);
+                PowerButton modButton = UtilsInternal.CreateModPowerButton(mod.ModName, ModLoader.ToggleMod, 
+                    UtilsInternal.LoadSprite(Path.Combine(mod.MetaLocation, "icon.png")), mod, mod.Description);
                 Utils.AddButtonToTab(modButton, tab, newPosition);
                 if (ModCompiler.CompiledMods.IndexOf(mod) % 2 == 0)
                     newPosition = new Vector2(newPosition.x, -18);
