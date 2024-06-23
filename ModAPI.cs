@@ -109,6 +109,31 @@ namespace WorldBoxModLoader
 
                 return button;
             }
+            public static PowersTab GetTab(string tabName)
+            {
+                if (string.IsNullOrEmpty(tabName)) return null;
+                Transform tabTransform = CanvasMain.instance.canvas_ui.transform.Find(
+                    $"CanvasBottom/BottomElements/BottomElementsMover/CanvasScrollView/Scroll View/Viewport/Content/buttons/{tabName}");
+
+                return tabTransform == null ? null : tabTransform.GetComponent<PowersTab>();
+            }
+            public static void AddButtonToTab(PowerButton button, PowersTab tab, Vector2 position)
+            {
+                Transform transform = button.transform;
+                transform.SetParent(tab.transform);
+                transform.localPosition = position;
+                transform.localScale = Vector3.one;
+                tab.powerButtons.Add(button);
+            }
+            public static ScrollWindow CreateEmptyWindow(string pWindowID, string pWindowTitleKey)
+            {
+                ScrollWindow window = Object.Instantiate(Resources.Load<ScrollWindow>("windows/empty"),
+                    CanvasMain.instance.transformWindows);
+                window.screen_id = pWindowID;
+                window.name = pWindowID;
+
+                return window;
+            }
             public static PowerButton CreateWindowButton([NotNull] string buttonId, [NotNull] string windowId, Sprite buttonIcon)
             {
                 PowerButton prefab = UtilsInternal.FindResource<PowerButton>("worldlaws");
@@ -121,31 +146,6 @@ namespace WorldBoxModLoader
                 button.gameObject.SetActive(true);
                
                 return button;
-            }
-            public static void AddButtonToTab(PowerButton button, PowersTab tab, Vector2 position)
-            {
-                Transform transform = button.transform;
-                transform.SetParent(tab.transform);
-                transform.localPosition = position;
-                transform.localScale = Vector3.one;
-                tab.powerButtons.Add(button);
-            }
-            public static PowersTab GetTab(string tabName)
-            {
-                if (string.IsNullOrEmpty(tabName)) return null;
-                Transform tabTransform = CanvasMain.instance.canvas_ui.transform.Find(
-                    $"CanvasBottom/BottomElements/BottomElementsMover/CanvasScrollView/Scroll View/Viewport/Content/buttons/{tabName}");
-
-                return tabTransform == null ? null : tabTransform.GetComponent<PowersTab>();
-            }
-            public static ScrollWindow CreateEmptyWindow(string pWindowID, string pWindowTitleKey)
-            {
-                ScrollWindow window = Object.Instantiate(Resources.Load<ScrollWindow>("windows/empty"),
-                    CanvasMain.instance.transformWindows);
-                window.screen_id = pWindowID;
-                window.name = pWindowID;
-
-                return window;
             }
             public static PowersTab CreateTab(string tabName, string titleKey, Sprite tabIcon)
             {

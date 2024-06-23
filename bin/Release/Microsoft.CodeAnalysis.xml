@@ -1055,6 +1055,16 @@
             Simple struct type with explicit size and no members.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.CodeGen.ModuleCancellationTokenField">
+            <summary>
+            Synthesized by <see cref="F:Microsoft.CodeAnalysis.Emit.InstrumentationKind.ModuleCancellation"/> instrumentation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.CodeGen.ModuleCancellationTokenField.#ctor(Microsoft.Cci.INamedTypeDefinition,Microsoft.Cci.ITypeReference)">
+            <summary>
+            Synthesized by <see cref="F:Microsoft.CodeAnalysis.Emit.InstrumentationKind.ModuleCancellation"/> instrumentation.
+            </summary>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.CodeGen.MappedField">
             <summary>
             Definition of a simple field mapped to a metadata block
@@ -1700,15 +1710,17 @@
              threads.</para>
              </devremarks>
         </member>
-        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder._dictionary">
+        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder.PrivateMarshal">
             <summary>
-            The immutable collection this builder is based on.
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
             </summary>
         </member>
-        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder._mutableDictionary">
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder.PrivateMarshal.FindValue(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{`0,`1}.Builder,`0)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1}.Builder,``0)"/>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder._builder">
             <summary>
-            The current mutable collection this builder is operating on. This field is initialized to a copy of
-            <see cref="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder._dictionary"/> the first time a change is made.
+            The private builder implementation.
             </summary>
         </member>
         <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Enumerator.ReturnType.KeyValuePair">
@@ -1726,9 +1738,30 @@
             <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/>.
             </summary>
         </member>
-        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.PrivateInterlocked">
+        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.PrivateMarshal">
             <summary>
-            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/>.
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/> and
+            <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.PrivateMarshal.FindValue(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{`0,`1},`0)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1},``0)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.PrivateMarshal.AsImmutableSegmentedDictionary(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{`0,`1})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedDictionary``2(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{``0,``1})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.PrivateMarshal.AsSegmentedDictionary(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{`0,`1})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedDictionary``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1})"/>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.ValueBuilder._dictionary">
+            <summary>
+            The immutable collection this builder is based on.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.ValueBuilder._mutableDictionary">
+            <summary>
+            The current mutable collection this builder is operating on. This field is initialized to a copy of
+            <see cref="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.ValueBuilder._dictionary"/> the first time a change is made.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet.Create``1">
@@ -1770,15 +1803,62 @@
         <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet.ToImmutableSegmentedHashSet``1(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet{``0}.Builder)">
             <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet.ToImmutableHashSet``1(System.Collections.Immutable.ImmutableHashSet{``0}.Builder)"/>
         </member>
-        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Builder._set">
-            <summary>
-            The immutable collection this builder is based on.
-            </summary>
+        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1">
+             <summary>
+             Represents a segmented hash set that is immutable; meaning it cannot be changed once it is created.
+             </summary>
+             <remarks>
+             <para>There are different scenarios best for <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> and others
+             best for <see cref="T:System.Collections.Immutable.ImmutableHashSet`1"/>.</para>
+            
+             <para>The following table summarizes the performance characteristics of
+             <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/>:</para>
+             
+             <list type="table">
+               <item>
+                 <description>Operation</description>
+                 <description><see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> Complexity</description>
+                 <description><see cref="T:System.Collections.Immutable.ImmutableHashSet`1"/> Complexity</description>
+                 <description>Comments</description>
+               </item>
+               <item>
+                 <description>Contains</description>
+                 <description>O(1)</description>
+                 <description>O(log n)</description>
+                 <description>Directly index into the underlying segmented list</description>
+               </item>
+               <item>
+                 <description>Add()</description>
+                 <description>O(n)</description>
+                 <description>O(log n)</description>
+                 <description>Requires creating a new segmented hash set and cloning all impacted segments</description>
+               </item>
+             </list>
+             
+             <para>This type is backed by segmented arrays to avoid using the Large Object Heap without impacting algorithmic
+             complexity.</para>
+             </remarks>
+             <typeparam name="T">The type of the value in the set.</typeparam>
+             <devremarks>
+             <para>This type has a documented contract of being exactly one reference-type field in size. Our own
+             <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/> class depends on it, as well as others externally.</para>
+            
+             <para><strong>IMPORTANT NOTICE FOR MAINTAINERS AND REVIEWERS:</strong></para>
+            
+             <para>This type should be thread-safe. As a struct, it cannot protect its own fields from being changed from one
+             thread while its members are executing on other threads because structs can change <em>in place</em> simply by
+             reassigning the field containing this struct. Therefore it is extremely important that <strong>⚠⚠ Every member
+             should only dereference <c>this</c> ONCE ⚠⚠</strong>. If a member needs to reference the
+             <see cref="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1._set"/> field, that counts as a dereference of <c>this</c>. Calling other instance members
+             (properties or methods) also counts as dereferencing <c>this</c>. Any member that needs to use <c>this</c> more
+             than once must instead assign <c>this</c> to a local variable and use that for the rest of the code instead.
+             This effectively copies the one field in the struct to a local variable so that it is insulated from other
+             threads.</para>
+             </devremarks>
         </member>
-        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Builder._mutableSet">
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Builder._builder">
             <summary>
-            The current mutable collection this builder is operating on. This field is initialized to a copy of
-            <see cref="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Builder._set"/> the first time a change is made.
+            The private builder implementation.
             </summary>
         </member>
         <member name="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Builder.KeyComparer">
@@ -1853,10 +1933,85 @@
         <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Enumerator.Reset">
             <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Enumerator.Reset"/>
         </member>
-        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.PrivateInterlocked">
+        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.PrivateMarshal">
             <summary>
-            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/>.
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/> and
+            <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
             </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.PrivateMarshal.AsImmutableSegmentedHashSet(Microsoft.CodeAnalysis.Collections.SegmentedHashSet{`0})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedHashSet``1(Microsoft.CodeAnalysis.Collections.SegmentedHashSet{``0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.PrivateMarshal.AsSegmentedHashSet(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet{`0})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedHashSet``1(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet{``0})"/>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder._set">
+            <summary>
+            The immutable collection this builder is based on.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder._mutableSet">
+            <summary>
+            The current mutable collection this builder is operating on. This field is initialized to a copy of
+            <see cref="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder._set"/> the first time a change is made.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.KeyComparer">
+            <inheritdoc cref="P:System.Collections.Immutable.ImmutableHashSet`1.Builder.KeyComparer"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Count">
+            <inheritdoc cref="P:System.Collections.Immutable.ImmutableHashSet`1.Builder.Count"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Add(`0)">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.Add(`0)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Clear">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.Clear"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Contains(`0)">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.Contains(`0)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.ExceptWith(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.ExceptWith(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.GetEnumerator"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.IntersectWith(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.IntersectWith(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Overlaps(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.Overlaps(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.Remove(`0)">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.Remove(`0)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.SetEquals(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.SetEquals(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.TryGetValue(`0,`0@)">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.TryGetValue(`0,`0@)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.UnionWith(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.UnionWith(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.ValueBuilder.ToImmutable">
+            <inheritdoc cref="M:System.Collections.Immutable.ImmutableHashSet`1.Builder.ToImmutable"/>
         </member>
         <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.Empty">
             <inheritdoc cref="F:System.Collections.Immutable.ImmutableHashSet`1.Empty"/>
@@ -2006,7 +2161,7 @@
         </member>
         <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.Builder._builder">
             <summary>
-            The immutable collection this builder is based on.
+            The private builder implementation.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.Builder.ItemRef(System.Int32)">
@@ -2123,10 +2278,17 @@
         <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.Builder.TrueForAll(System.Predicate{`0})">
             <inheritdoc cref="M:System.Collections.Immutable.ImmutableList`1.Builder.TrueForAll(System.Predicate{`0})"/>
         </member>
-        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.PrivateInterlocked">
+        <member name="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.PrivateMarshal">
             <summary>
-            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/>.
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.RoslynImmutableInterlocked"/> and
+            <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
             </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.PrivateMarshal.AsImmutableSegmentedList(Microsoft.CodeAnalysis.Collections.SegmentedList{`0})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedList``1(Microsoft.CodeAnalysis.Collections.SegmentedList{``0})"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.PrivateMarshal.AsSegmentedList(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList{`0})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedList``1(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList{``0})"/>
         </member>
         <member name="F:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.ValueBuilder._list">
             <summary>
@@ -2320,6 +2482,17 @@
             <summary>
             Provides static methods to invoke <see cref="T:System.Collections.Generic.ICollection`1"/> members on value types that explicitly implement
             the member.
+            </summary>
+            <remarks>
+            Normally, invocation of explicit interface members requires boxing or copying the value type, which is
+            especially problematic for operations that mutate the value. Invocation through these helpers behaves like a
+            normal call to an implicitly implemented member.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Collections.Internal.IDictionaryCalls">
+            <summary>
+            Provides static methods to invoke <see cref="T:System.Collections.IDictionary"/> members on value types that explicitly implement the
+            member.
             </summary>
             <remarks>
             Normally, invocation of explicit interface members requires boxing or copying the value type, which is
@@ -2763,6 +2936,14 @@
             </summary>
             <typeparam name="T">The type of elements stored in the array.</typeparam>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.Collections.SegmentedArray`1.PrivateMarshal">
+            <summary>
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedArray`1.PrivateMarshal.AsSegments(Microsoft.CodeAnalysis.Collections.SegmentedArray{`0})">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegments``1(Microsoft.CodeAnalysis.Collections.SegmentedArray{``0})"/>
+        </member>
         <member name="P:Microsoft.CodeAnalysis.Collections.SegmentedArray`1.SegmentSize">
              <summary>
              The number of elements in each page of the segmented array of type <typeparamref name="T"/>.
@@ -2786,6 +2967,185 @@
             The bit mask to apply to an array index to get the index within a page of <see cref="F:Microsoft.CodeAnalysis.Collections.SegmentedArray`1._items"/>.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal">
+            <summary>
+            An unsafe class that provides a set of methods to access the underlying data representations of immutable segmented
+            collections.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegments``1(Microsoft.CodeAnalysis.Collections.SegmentedArray{``0})">
+            <summary>
+            Gets the backing storage array for a <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedArray`1"/>.
+            </summary>
+            <typeparam name="T">The type of elements stored in the array.</typeparam>
+            <param name="array">The segmented array.</param>
+            <returns>The backing storage array for the segmented array. Note that replacing segments within the returned
+            value will invalidate the <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedArray`1"/> data structure.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{``0,``1},``0)">
+            <summary>
+            Gets either a ref to a <typeparamref name="TValue"/> in the <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> or a
+            ref null if it does not exist in the <paramref name="dictionary"/>.
+            </summary>
+            <param name="dictionary">The dictionary to get the ref to <typeparamref name="TValue"/> from.</param>
+            <param name="key">The key used for lookup.</param>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+            <remarks>
+            Items should not be added or removed from the <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> while the ref
+            <typeparamref name="TValue"/> is in use. The ref null can be detected using <see cref="M:System.Runtime.CompilerServices.Unsafe.IsNullRef``1(``0@)"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1},``0)">
+            <summary>
+            Gets either a read-only ref to a <typeparamref name="TValue"/> in the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/>
+            or a ref null if it does not exist in the <paramref name="dictionary"/>.
+            </summary>
+            <param name="dictionary">The dictionary to get the ref to <typeparamref name="TValue"/> from.</param>
+            <param name="key">The key used for lookup.</param>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+            <remarks>
+            The ref null can be detected using <see cref="M:System.Runtime.CompilerServices.Unsafe.IsNullRef``1(``0@)"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1}.Builder,``0)">
+            <summary>
+            Gets either a ref to a <typeparamref name="TValue"/> in the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder"/>
+            or a ref null if it does not exist in the <paramref name="dictionary"/>.
+            </summary>
+            <param name="dictionary">The dictionary to get the ref to <typeparamref name="TValue"/> from.</param>
+            <param name="key">The key used for lookup.</param>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+            <remarks>
+            Items should not be added or removed from the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.Builder"/>
+            while the ref <typeparamref name="TValue"/> is in use. The ref null can be detected using
+            <see cref="M:System.Runtime.CompilerServices.Unsafe.IsNullRef``1(``0@)"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedList``1(Microsoft.CodeAnalysis.Collections.SegmentedList{``0})">
+            <summary>
+            Gets an <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value wrapping the input <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedList`1"/>.
+            </summary>
+            <typeparam name="T">The type of elements in the input segmented list.</typeparam>
+            <param name="list">The input segmented list to wrap in the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value.</param>
+            <returns>An <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value wrapping <paramref name="list"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should take extra care to ensure that they're the sole owners of the input
+            list, and that it won't be modified once the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value starts
+            being used. Doing so might cause undefined behavior in code paths which don't expect the contents of a given
+            <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> values to change after its creation.
+            </para>
+            <para>
+            If <paramref name="list"/> is <see langword="null"/>, the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value
+            will be uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.IsDefault"/> property will be
+            <see langword="true"/>).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedList``1(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList{``0})">
+            <summary>
+            Gets the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedList`1"/> for an input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value.
+            </summary>
+            <typeparam name="T">The type of elements in the input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value.</typeparam>
+            <param name="list">The input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value to get the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedList`1"/> from.</param>
+            <returns>The underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedList`1"/> for <paramref name="list"/>, if present; otherwise, <see langword="null"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should make sure to not pass the resulting underlying list to methods that
+            might mutate it. Doing so might cause undefined behavior in code paths using <paramref name="list"/> which
+            don't expect the contents of the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1"/> value to change.
+            </para>
+            <para>
+            If <paramref name="list"/> is uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedList`1.IsDefault"/> property is
+            <see langword="true"/>), the resulting <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedList`1"/> will be <see langword="null"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedHashSet``1(Microsoft.CodeAnalysis.Collections.SegmentedHashSet{``0})">
+            <summary>
+            Gets an <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value wrapping the input <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedHashSet`1"/>.
+            </summary>
+            <typeparam name="T">The type of elements in the input segmented hash set.</typeparam>
+            <param name="set">The input segmented hash set to wrap in the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value.</param>
+            <returns>An <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value wrapping <paramref name="set"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should take extra care to ensure that they're the sole owners of the input
+            set, and that it won't be modified once the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value starts
+            being used. Doing so might cause undefined behavior in code paths which don't expect the contents of a given
+            <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> values to change after its creation.
+            </para>
+            <para>
+            If <paramref name="set"/> is <see langword="null"/>, the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/>
+            value will be uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.IsDefault"/> property will be
+            <see langword="true"/>).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedHashSet``1(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet{``0})">
+            <summary>
+            Gets the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedHashSet`1"/> for an input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value.
+            </summary>
+            <typeparam name="T">The type of elements in the input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value.</typeparam>
+            <param name="set">The input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value to get the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedHashSet`1"/> from.</param>
+            <returns>The underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedHashSet`1"/> for <paramref name="set"/>, if present; otherwise, <see langword="null"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should make sure to not pass the resulting underlying hash set to methods that
+            might mutate it. Doing so might cause undefined behavior in code paths using <paramref name="set"/> which
+            don't expect the contents of the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1"/> value to change.
+            </para>
+            <para>
+            If <paramref name="set"/> is uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedHashSet`1.IsDefault"/>
+            property is <see langword="true"/>), the resulting <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedHashSet`1"/> will be <see langword="null"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsImmutableSegmentedDictionary``2(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{``0,``1})">
+            <summary>
+            Gets an <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value wrapping the input <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/>.
+            </summary>
+            <typeparam name="TKey">The type of keys in the input segmented dictionary.</typeparam>
+            <typeparam name="TValue">The type of values in the input segmented dictionary.</typeparam>
+            <param name="dictionary">The input segmented dictionary to wrap in the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value.</param>
+            <returns>An <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value wrapping <paramref name="dictionary"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should take extra care to ensure that they're the sole owners of the input
+            dictionary, and that it won't be modified once the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/>
+            value starts being used. Doing so might cause undefined behavior in code paths which don't expect the contents
+            of a given <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> values to change after its creation.
+            </para>
+            <para>
+            If <paramref name="dictionary"/> is <see langword="null"/>, the returned <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/>
+            value will be uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.IsDefault"/>
+            property will be <see langword="true"/>).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.AsSegmentedDictionary``2(Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary{``0,``1})">
+            <summary>
+            Gets the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> for an input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value.
+            </summary>
+            <typeparam name="TKey">The type of keys in the input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value.</typeparam>
+            <typeparam name="TValue">The type of values in the input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value.</typeparam>
+            <param name="dictionary">The input <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value to get the underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> from.</param>
+            <returns>The underlying <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> for <paramref name="dictionary"/>, if present; otherwise, <see langword="null"/>.</returns>
+            <remarks>
+            <para>
+            When using this method, callers should make sure to not pass the resulting underlying dictionary to methods that
+            might mutate it. Doing so might cause undefined behavior in code paths using <paramref name="dictionary"/> which
+            don't expect the contents of the <see cref="T:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2"/> value to change.
+            </para>
+            <para>
+            If <paramref name="dictionary"/> is uninitialized (i.e. its <see cref="P:Microsoft.CodeAnalysis.Collections.ImmutableSegmentedDictionary`2.IsDefault"/>
+            property is <see langword="true"/>), the resulting <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2"/> will be <see langword="null"/>.
+            </para>
+            </remarks>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2">
             <summary>
             Represents a collection of keys and values.
@@ -2796,6 +3156,14 @@
             </remarks>
             <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2.PrivateMarshal">
+            <summary>
+            Private helper class for use only by <see cref="T:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2.PrivateMarshal.FindValue(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{`0,`1},`0)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Collections.SegmentedCollectionsMarshal.GetValueRefOrNullRef``2(Microsoft.CodeAnalysis.Collections.SegmentedDictionary{``0,``1},``0)"/>
         </member>
         <member name="F:Microsoft.CodeAnalysis.Collections.SegmentedDictionary`2._comparer">
             <summary>
@@ -3086,6 +3454,14 @@
             </remarks>
             <typeparam name="T">The type of elements in the list.</typeparam>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.CachingBase`1.#ctor(System.Int32,System.Boolean)">
+            <param name="createBackingArray">Whether or not the backing array should be created immediately, or should
+            be deferred until the first time that <see cref="P:Microsoft.CodeAnalysis.CachingBase`1.Entries"/> is used.  Note: if <paramref
+            name="createBackingArray"/> is <see langword="false"/> then the array will be created in a non-threadsafe
+            fashion (effectively different threads might observe a small window of time when different arrays could be
+            returned.  Derived types should only pass <see langword="false"/> here if that behavior is acceptable for
+            their use case.</param>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.ConsListExtensions">
             <summary>
             Extension methods associated with ConsList.
@@ -3254,7 +3630,28 @@
             <param name="selector">A transform function to apply to each element.</param>
             <returns>If the array's length is 0, this will return an empty immutable array.</returns>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.ImmutableArrayExtensions.SelectManyAsArray``2(System.Collections.Immutable.ImmutableArray{``0},System.Func{``0,System.Collections.Immutable.ImmutableArray{``1}})">
+            <summary>
+            Maps and flattens a subset of immutable array to another immutable array.
+            </summary>
+            <typeparam name="TItem">Type of the source array items</typeparam>
+            <typeparam name="TResult">Type of the transformed array items</typeparam>
+            <param name="array">The array to transform</param>
+            <param name="selector">A transform function to apply to each element.</param>
+            <returns>If the array's length is 0, this will return an empty immutable array.</returns>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.ImmutableArrayExtensions.SelectManyAsArray``2(System.Collections.Immutable.ImmutableArray{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Collections.Generic.IEnumerable{``1}})">
+            <summary>
+            Maps and flattens a subset of immutable array to another immutable array.
+            </summary>
+            <typeparam name="TItem">Type of the source array items</typeparam>
+            <typeparam name="TResult">Type of the transformed array items</typeparam>
+            <param name="array">The array to transform</param>
+            <param name="predicate">The condition to use for filtering the array content.</param>
+            <param name="selector">A transform function to apply to each element that is not filtered out by <paramref name="predicate"/>.</param>
+            <returns>If the items's length is 0, this will return an empty immutable array.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ImmutableArrayExtensions.SelectManyAsArray``2(System.Collections.Immutable.ImmutableArray{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Collections.Immutable.ImmutableArray{``1}})">
             <summary>
             Maps and flattens a subset of immutable array to another immutable array.
             </summary>
@@ -3325,6 +3722,22 @@
             Returns an array of distinct elements, preserving the order in the original array.
             If the array has no duplicates, the original array is returned. The original array must not be null.
             </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ImmutableArrayExtensions.HasDuplicates``1(System.Collections.Immutable.ImmutableArray{``0})">
+            <summary>
+            Determines whether duplicates exist using default equality comparer.
+            </summary>
+            <param name="array">Array to search for duplicates</param>
+            <returns>Whether duplicates were found</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ImmutableArrayExtensions.HasDuplicates``1(System.Collections.Immutable.ImmutableArray{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Determines whether duplicates exist using <paramref name="comparer"/>. Use other override
+            if you don't need a custom comparer.
+            </summary>
+            <param name="array">Array to search for duplicates</param>
+            <param name="comparer">Comparer to use in search</param>
+            <returns>Whether duplicates were found</returns>
         </member>
         <member name="M:Microsoft.CodeAnalysis.ImmutableHashSetExtensions.SetEqualsWithoutIntermediateHashSet``1(System.Collections.Immutable.ImmutableHashSet{``0},System.Collections.Immutable.ImmutableHashSet{``0})">
             <summary>
@@ -4435,11 +4848,12 @@
             csc.exe and vbc.exe entry point.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.CommonCompiler.RunGenerators(Microsoft.CodeAnalysis.Compilation,Microsoft.CodeAnalysis.ParseOptions,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.ISourceGenerator},Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptionsProvider,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.AdditionalText},Microsoft.CodeAnalysis.DiagnosticBag)">
+        <member name="M:Microsoft.CodeAnalysis.CommonCompiler.RunGenerators(Microsoft.CodeAnalysis.Compilation,System.String,Microsoft.CodeAnalysis.ParseOptions,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.ISourceGenerator},Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptionsProvider,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.AdditionalText},Microsoft.CodeAnalysis.DiagnosticBag)">
             <summary>
             Perform source generation, if the compiler supports it.
             </summary>
             <param name="input">The compilation before any source generation has occurred.</param>
+            <param name="generatedFilesBaseDirectory">The base directory for the <see cref="P:Microsoft.CodeAnalysis.SyntaxTree.FilePath"/> of generated files.</param>
             <param name="parseOptions">The <see cref="T:Microsoft.CodeAnalysis.ParseOptions"/> to use when parsing any generated sources.</param>
             <param name="generators">The generators to run</param>
             <param name="analyzerConfigOptionsProvider">A provider that returns analyzer config options.</param>
@@ -4919,25 +5333,19 @@
             True if the SemanticModel should ignore accessibility rules when answering semantic questions.
             </param>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Compilation.CommonGetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)">
+        <member name="M:Microsoft.CodeAnalysis.Compilation.CommonGetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.SemanticModelOptions)">
             <summary>
             Gets a <see cref="T:Microsoft.CodeAnalysis.SemanticModel"/> for the given <paramref name="syntaxTree"/>.
-            If <see cref="P:Microsoft.CodeAnalysis.Compilation.SemanticModelProvider"/> is non-null, it attempts to use <see cref="M:Microsoft.CodeAnalysis.SemanticModelProvider.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.Compilation,System.Boolean)"/>
-            to get a semantic model. Otherwise, it creates a new semantic model using <see cref="M:Microsoft.CodeAnalysis.Compilation.CreateSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)"/>.
+            If <see cref="P:Microsoft.CodeAnalysis.Compilation.SemanticModelProvider"/> is non-null, it attempts to use <see cref="M:Microsoft.CodeAnalysis.SemanticModelProvider.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.Compilation,Microsoft.CodeAnalysis.SemanticModelOptions)"/>
+            to get a semantic model. Otherwise, it creates a new semantic model using <see cref="M:Microsoft.CodeAnalysis.Compilation.CreateSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.SemanticModelOptions)"/>.
             </summary>
-            <param name="syntaxTree"></param>
-            <param name="ignoreAccessibility"></param>
-            <returns></returns>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Compilation.CreateSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)">
+        <member name="M:Microsoft.CodeAnalysis.Compilation.CreateSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.SemanticModelOptions)">
             <summary>
             Creates a new <see cref="T:Microsoft.CodeAnalysis.SemanticModel"/> for the given <paramref name="syntaxTree"/>.
-            Unlike the <see cref="M:Microsoft.CodeAnalysis.Compilation.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)"/> and <see cref="M:Microsoft.CodeAnalysis.Compilation.CommonGetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)"/>,
+            Unlike the <see cref="M:Microsoft.CodeAnalysis.Compilation.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,System.Boolean)"/> and <see cref="M:Microsoft.CodeAnalysis.Compilation.CommonGetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.SemanticModelOptions)"/>,
             it does not attempt to use the <see cref="P:Microsoft.CodeAnalysis.Compilation.SemanticModelProvider"/> to get a semantic model, but instead always creates a new semantic model.
             </summary>
-            <param name="syntaxTree"></param>
-            <param name="ignoreAccessibility"></param>
-            <returns></returns>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Compilation.CreateErrorTypeSymbol(Microsoft.CodeAnalysis.INamespaceOrTypeSymbol,System.String,System.Int32)">
             <summary>
@@ -6655,9 +7063,9 @@
             CorLibrary assembly referenced by this module.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Emit.CommonPEModuleBuilder.GetStrings">
+        <member name="M:Microsoft.CodeAnalysis.Emit.CommonPEModuleBuilder.CopyStrings">
             <summary>
-            Returns User Strings referenced from the IL in the module.
+            Returns copy of User Strings referenced from the IL in the module.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Emit.CommonPEModuleBuilder.GetAssemblyReferenceAliases(Microsoft.CodeAnalysis.Emit.EmitContext)">
@@ -7242,6 +7650,21 @@
             <summary>
             Instruments the code to add test coverage.
             </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Emit.InstrumentationKind.StackOverflowProbing">
+            <summary>
+            Instruments all methods, local functions and lambdas in the code with calls to <see cref="M:System.Runtime.CompilerServices.RuntimeHelpers.EnsureSufficientExecutionStack"/>,
+            to guard against accidental stack overflow.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Emit.InstrumentationKind.ModuleCancellation">
+            <summary>
+            Instruments code with calls to <see cref="M:System.Threading.CancellationToken.ThrowIfCancellationRequested"/> on a module-level defined 
+            <see cref="T:System.Threading.CancellationToken"/> to enable cancellation of code that hasn't necessarily been written as cancellable.
+            </summary>
+            <remarks>
+            The <see cref="T:System.Threading.CancellationToken"/> is emitted to a static field <code>&lt;PrivateImplementationDetails&gt;.ModuleCancellationToken</code>.
+            </remarks>
         </member>
         <member name="T:Microsoft.CodeAnalysis.Emit.IteratorMoveNextBodyDebugInfo">
             <summary>
@@ -11299,12 +11722,18 @@
         <member name="F:Microsoft.CodeAnalysis.Operations.ArgumentKind.ParamArray">
             <summary>
             Argument is a param array created by compilers for the matching C# params or VB ParamArray parameter. 
-            Note, the value is a an array creation expression that encapsulates all the elements, if any.
+            Note, the value is an array creation expression that encapsulates all the elements, if any.
             </summary>
         </member>
         <member name="F:Microsoft.CodeAnalysis.Operations.ArgumentKind.DefaultValue">
             <summary>
             Argument is a default value supplied automatically by the compilers.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Operations.ArgumentKind.ParamCollection">
+            <summary>
+            Argument is a param collection created by compilers for the matching C# params parameter. 
+            Note, the value is a collection expression that encapsulates all the elements, if any.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.Operations.BinaryOperatorKind">
@@ -13122,7 +13551,7 @@
             This provider can be attached to a compilation, see <see cref="P:Microsoft.CodeAnalysis.Compilation.SemanticModelProvider"/>.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.SemanticModelProvider.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.Compilation,System.Boolean)">
+        <member name="M:Microsoft.CodeAnalysis.SemanticModelProvider.GetSemanticModel(Microsoft.CodeAnalysis.SyntaxTree,Microsoft.CodeAnalysis.Compilation,Microsoft.CodeAnalysis.SemanticModelOptions)">
             <summary>
             Gets a <see cref="T:Microsoft.CodeAnalysis.SemanticModel"/> for the given <paramref name="tree"/> that belongs to the given <paramref name="compilation"/>.
             </summary>
@@ -16771,6 +17200,13 @@
             Otherwise, returns null.
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.Diagnostics.SuppressionInfo.ProgrammaticSuppressions">
+            <summary>
+            If the diagnostic was suppressed by one or more programmatic suppressions by <see cref="T:Microsoft.CodeAnalysis.Diagnostics.DiagnosticSuppressor"/>(s),
+            then returns the corresponding <see cref="T:Microsoft.CodeAnalysis.Diagnostics.Suppression"/>s, in no specific order.
+            Otherwise, returns an empty array.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.IAnalyzerAssemblyLoaderInternal.IsHostAssembly(System.Reflection.Assembly)">
             <summary>
             Is this an <see cref="T:System.Reflection.Assembly"/> that the loader considers to be part of the hosting 
@@ -16801,6 +17237,16 @@
         <member name="F:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader._analyzerAssemblyInfoMap">
             <summary>
             Set of analyzer dependencies original full paths to the data calculated for that path
+            </summary>
+            <remarks>
+            Access must be guarded by <see cref="F:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader._guard"/>
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader._analyzerSatelliteAssemblyRealPaths">
+            <summary>
+            Mapping of analyzer dependency original full path and culture to the real satellite
+            assembly path. If the satellite assembly doesn't exist for the original analyzer and 
+            culture, the real path value stored will be null.
             </summary>
             <remarks>
             Access must be guarded by <see cref="F:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader._guard"/>
@@ -16843,42 +17289,49 @@
             implementation should result in errors.
             </remarks>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.GetSatelliteInfoForPath(System.String,System.String)">
+        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.GetRealSatelliteLoadPath(System.String,System.Globalization.CultureInfo)">
             <summary>
-            Get the real load path of the satellite assembly given the original path to the analyzer 
-            and the desired culture name.
+            Get the path a satellite assembly should be loaded from for the given original 
+            analyzer path and culture
             </summary>
+            <remarks>
+            This is used during assembly resolve for satellite assemblies to determine the
+            path from where the satellite assembly should be loaded for the specified culture.
+            This method calls <see cref="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PrepareSatelliteAssemblyToLoad(System.String,System.String)"/> to ensure this path
+            contains the satellite assembly.
+            </remarks>
         </member>
         <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.GetBestPath(System.Reflection.AssemblyName)">
             <summary>
-            Return the best path for loading an assembly with the specified <see cref="T:System.Reflection.AssemblyName"/>. This
-            return is a real path to load, not an original path.
+            Return the best (original, real) path information for loading an assembly with the specified <see cref="T:System.Reflection.AssemblyName"/>.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PreparePathToLoad(System.String,System.Collections.Immutable.ImmutableHashSet{System.String})">
+        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PreparePathToLoad(System.String)">
             <summary>
             When overridden in a derived class, allows substituting an assembly path after we've
             identified the context to load an assembly in, but before the assembly is actually
             loaded from disk. This is used to substitute out the original path with the shadow-copied version.
-            
-            In the case the <param name="assemblyFilePath" /> is moved to a new location then 
-            the resource DLLs for the specified <paramref name="resourceAssemblyCultureNames"/> must also be 
-            moved _but_ retain their original relative location.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PrepareSatelliteAssemblyToLoad(System.String,System.String)">
+            <summary>
+            When overridden in a derived class, allows substituting a satellite assembly path after we've
+            identified the context to load a satellite assembly in, but before the satellite assembly is actually
+            loaded from disk. This is used to substitute out the original path with the shadow-copied version.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.GetRealAnalyzerLoadPath(System.String)">
             <summary>
-            When <see cref="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PreparePathToLoad(System.String,System.Collections.Immutable.ImmutableHashSet{System.String})"/> is overridden this returns the most recent
+            When <see cref="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PreparePathToLoad(System.String)"/> is overridden this returns the most recent
             real path calculated for the <paramref name="originalFullPath"/>
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.GetRealSatelliteLoadPath(System.String)">
+        <member name="M:Microsoft.CodeAnalysis.DefaultAnalyzerAssemblyLoader.PreparePathToLoad(System.String)">
             <summary>
-            When <see cref="M:Microsoft.CodeAnalysis.AnalyzerAssemblyLoader.PreparePathToLoad(System.String,System.Collections.Immutable.ImmutableHashSet{System.String})"/> is overridden this returns the most recent
-            real path for the given analyzer satellite assembly path
+            The default implementation is to simply load in place.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.DefaultAnalyzerAssemblyLoader.PreparePathToLoad(System.String,System.Collections.Immutable.ImmutableHashSet{System.String})">
+        <member name="M:Microsoft.CodeAnalysis.DefaultAnalyzerAssemblyLoader.PrepareSatelliteAssemblyToLoad(System.String,System.String)">
             <summary>
             The default implementation is to simply load in place.
             </summary>
@@ -16939,11 +17392,6 @@
             <summary>
             The directory where this instance of <see cref="T:Microsoft.CodeAnalysis.ShadowCopyAnalyzerAssemblyLoader"/>
             will shadow-copy assemblies, and the mutex created to mark that the owner of it is still active.
-            </summary>
-        </member>
-        <member name="F:Microsoft.CodeAnalysis.ShadowCopyAnalyzerAssemblyLoader._assemblyDirectoryId">
-            <summary>
-            Used to generate unique names for per-assembly directories. Should be updated with <see cref="M:System.Threading.Interlocked.Increment(System.Int32@)"/>.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.CommonMessageProvider">
@@ -18215,15 +18663,18 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.CreateDeclarationId(Microsoft.CodeAnalysis.ISymbol)">
             <summary>
-            Creates an id string used by external documentation comment files to identify declarations
-            of types, namespaces, methods, properties, etc.
+            Creates an id string used by external documentation comment files to identify declarations of types,
+            namespaces, methods, properties, etc.
             </summary>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="symbol"/> is <see langword="null"/>.</exception>
+            <returns>The documentation comment Id for this symbol, if it can be created. <see langword="null"/> if it cannot be.</returns>
         </member>
         <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.CreateReferenceId(Microsoft.CodeAnalysis.ISymbol)">
             <summary>
-            Creates an id string used to reference type symbols (not strictly declarations, includes
-            arrays, pointers, type parameters, etc.)
+            Creates an id string used to reference type symbols (not strictly declarations, includes arrays, pointers,
+            type parameters, etc.).
             </summary>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="symbol"/> is <see langword="null"/>.</exception>
         </member>
         <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.GetSymbolsForDeclarationId(System.String,Microsoft.CodeAnalysis.Compilation)">
             <summary>
@@ -18255,6 +18706,29 @@
         <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.GetFirstSymbolForReferenceId(System.String,Microsoft.CodeAnalysis.Compilation)">
             <summary>
             Gets the first symbol that matches the reference id string, order undefined.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.DocumentationCommentId.PrefixAndDeclarationGenerator">
+            <summary>
+            Callers should only call into <see cref="M:Microsoft.CodeAnalysis.SymbolVisitor`1.Visit(Microsoft.CodeAnalysis.ISymbol)"/> and should check <see
+            cref="P:Microsoft.CodeAnalysis.DocumentationCommentId.PrefixAndDeclarationGenerator.Failed"/> to see if it failed (in the case of an arbitrary symbol) or that it produced an expected
+            value (in the case a known symbol type was used).
+            </summary>
+            <remarks>
+            This will always succeed for a <see cref="T:Microsoft.CodeAnalysis.INamespaceSymbol"/> or <see cref="T:Microsoft.CodeAnalysis.INamedTypeSymbol"/>.  It may not
+            succeed for other symbols.
+            <para/> Once used, an instance of this visitor should be discarded.  Specifically it is stateful, and will
+            stay in the failed state once it transitions there.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.PrefixAndDeclarationGenerator.DefaultVisit(Microsoft.CodeAnalysis.ISymbol)">
+            <summary>
+            If we hit anything we don't know about, indicate failure.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.DocumentationCommentId.PrefixAndDeclarationGenerator.DeclarationGenerator.DefaultVisit(Microsoft.CodeAnalysis.ISymbol)">
+            <summary>
+            If we hit anything we don't know about, indicate failure.
             </summary>
         </member>
         <member name="P:Microsoft.CodeAnalysis.DocumentationCommentIncludeCache.CacheMissCount">
@@ -19570,6 +20044,11 @@
             if the generated constant would be outside the valid range of the type.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.ExtendedSpecialType">
+            <summary>
+            A structure meant to represent a union of <see cref="T:Microsoft.CodeAnalysis.SpecialType"/> and <see cref="T:Microsoft.CodeAnalysis.InternalSpecialType"/> values
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.FileSystemExtensions.Emit(Microsoft.CodeAnalysis.Compilation,System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.ResourceDescription},System.Threading.CancellationToken)">
             <summary>
             Emit the IL for the compilation into the specified stream.
@@ -20720,6 +21199,62 @@
         <member name="F:Microsoft.CodeAnalysis.OperationKind.Spread">
             <summary>Indicates an <see cref="T:Microsoft.CodeAnalysis.Operations.ISpreadOperation"/>.</summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.InternalSpecialType">
+            <summary>
+            Specifies the Ids of types that are expected to be defined in core library.
+            Unlike ids in <see cref="T:Microsoft.CodeAnalysis.SpecialType"/> enum, these ids are not meant for public consumption
+            and are meant for internal usage in compilers.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.InternalSpecialType.System_ReadOnlySpan_T">
+            <summary>
+            Indicates that the type is <see cref="T:System.ReadOnlySpan`1"/> from the COR library.
+            </summary>
+            <remarks>
+            Check for this special type cannot be used to find the "canonical" definition of <see cref="T:System.ReadOnlySpan`1"/>
+            since it is fully legal for it to come from sources other than the COR library, e.g. from `System.Memory` package.
+            The <see cref="F:Microsoft.CodeAnalysis.WellKnownType.System_ReadOnlySpan_T"/> should be used for that purpose instead
+            This entry mostly exists so that compiler can tell this type apart when resolving other members of the COR library
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.InternalSpecialType.System_Type">
+            <summary>
+            Indicates that the type is <see cref="T:System.Type"/> from the COR library.
+            </summary>
+            <remarks>
+            Check for this special type cannot be used to find the "canonical" definition of <see cref="T:System.Type"/>
+            since it is fully legal for it to come from sources other than the COR library.
+            The <see cref="F:Microsoft.CodeAnalysis.WellKnownType.System_Type"/> should be used for that purpose instead
+            This entry mostly exists so that compiler can tell this type apart when resolving other members of the COR library
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.InternalSpecialType.System_Reflection_MethodBase">
+            <summary>
+            Indicates that the type is <see cref="T:System.Reflection.MethodBase"/> from the COR library.
+            </summary>
+            <remarks>
+            Check for this special type cannot be used to find the "canonical" definition of <see cref="T:System.Reflection.MethodBase"/>
+            since it is fully legal for it to come from sources other than the COR library.
+            The <see cref="F:Microsoft.CodeAnalysis.WellKnownType.System_Reflection_MethodBase"/> should be used for that purpose instead
+            This entry mostly exists so that compiler can tell this type apart when resolving other members of the COR library
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.InternalSpecialType.System_Reflection_MethodInfo">
+            <summary>
+            Indicates that the type is <see cref="T:System.Reflection.MethodInfo"/> from the COR library.
+            </summary>
+            <remarks>
+            Check for this special type cannot be used to find the "canonical" definition of <see cref="T:System.Reflection.MethodInfo"/>
+            since it is fully legal for it to come from sources other than the COR library.
+            The <see cref="F:Microsoft.CodeAnalysis.WellKnownType.System_Reflection_MethodInfo"/> should be used for that purpose instead
+            This entry mostly exists so that compiler can tell this type apart when resolving other members of the COR library
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.InternalSpecialType.NextAvailable">
+            <summary>
+            This item should be kept last and it doesn't represent any specific type.
+            </summary>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.InternalUtilities.ConcurrentLruCache`2">
             <summary>
             Cache with a fixed size that evicts the least recently used members.
@@ -20894,6 +21429,11 @@
             should only be used in empty dictionaries.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.RoslynExperiments">
+            <summary>
+            Defines diagnostic info for Roslyn experimental APIs.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.StackGuard.EnsureSufficientExecutionStack(System.Int32)">
             <summary>
                 Ensures that the remaining stack space is large enough to execute
@@ -20960,7 +21500,7 @@
             Structure that describes a member of a type.
             </summary>
         </member>
-        <member name="F:Microsoft.CodeAnalysis.RuntimeMembers.MemberDescriptor.DeclaringTypeId">
+        <member name="F:Microsoft.CodeAnalysis.RuntimeMembers.MemberDescriptor._declaringTypeId">
             <summary>
             Id/token of containing type, usually value from some enum.
             For example from SpecialType enum.
@@ -24926,6 +25466,11 @@
             Gets a provider for analyzer options
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.GeneratorDriverState.BaseDirectory">
+            <summary>
+            The base directory for the <see cref="P:Microsoft.CodeAnalysis.SyntaxTree.FilePath"/> of generated files.
+            </summary>
+        </member>
         <member name="F:Microsoft.CodeAnalysis.GeneratorDriverState.ParseOptions">
             <summary>
             ParseOptions to use when parsing generator provided source.
@@ -25830,6 +26375,9 @@
             <summary>
             Count of special types. This is not a count of enum members.
             </summary>
+            <remarks>
+            The underlying numeric value of this member is expected to change every time a new special type is added
+            </remarks>
         </member>
         <member name="M:Microsoft.CodeAnalysis.SpecialTypeExtensions.IsClrInteger(Microsoft.CodeAnalysis.SpecialType)">
             <summary>
@@ -25859,6 +26407,15 @@
             Used for checking loop end condition for VB for loop.
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.SpecialTypeExtensions.CanOptimizeBehavior(Microsoft.CodeAnalysis.SpecialType)">
+            <summary>
+            Tells whether a different code path can be taken based on the fact, that a given type is a special type.
+            This method is called in places where conditions like <c>specialType != SpecialType.None</c> were previously used.
+            The main reason for this method to exist is to prevent such conditions, which introduce silent code changes every time a new special type is added.
+            This doesn't mean the checked special type range of this method cannot be modified,
+            but rather that each usage of this method needs to be reviewed to make sure everything works as expected in such cases
+            </summary>
+        </member>
         <member name="F:Microsoft.CodeAnalysis.SpecialTypes.s_emittedNames">
             <summary>
             Array of names for types from Cor Library.
@@ -25867,7 +26424,7 @@
             </summary>
             <remarks></remarks>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.SpecialTypes.GetMetadataName(Microsoft.CodeAnalysis.SpecialType)">
+        <member name="M:Microsoft.CodeAnalysis.SpecialTypes.GetMetadataName(Microsoft.CodeAnalysis.ExtendedSpecialType)">
             <summary>
             Gets the name of the special type as it would appear in metadata.
             </summary>
@@ -29137,7 +29694,17 @@
         </member>
         <member name="P:Microsoft.CodeAnalysis.IParameterSymbol.IsParams">
             <summary>
+            Returns true if the parameter was declared as a parameter array or as a parameter collection. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.IParameterSymbol.IsParamsArray">
+            <summary>
             Returns true if the parameter was declared as a parameter array. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.IParameterSymbol.IsParamsCollection">
+            <summary>
+            Returns true if the parameter was declared as a parameter collection. 
             </summary>
         </member>
         <member name="P:Microsoft.CodeAnalysis.IParameterSymbol.IsOptional">
@@ -29534,7 +30101,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.ISymbol.GetAttributes">
             <summary>
-            Gets the attributes for the symbol. Returns an empty <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            Gets the attributes for the symbol. Returns an empty <see cref="T:System.Collections.Immutable.ImmutableArray`1"/>
             if there are no attributes.
             </summary>
         </member>
@@ -31308,6 +31875,17 @@
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             </summary>
         </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.SlotCountTooLarge">
+            <summary>
+            Value used to indicate the slot count was too large to be encoded directly in our <see cref="F:Microsoft.CodeAnalysis.GreenNode._nodeFlagsAndSlotCount"/>
+            value.  Callers will have to store the value elsewhere and retrieve the full value themselves.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.GreenNode.GetSlotCount">
+            <summary>
+            Called when <see cref="P:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount.SmallSlotCount"/> returns a value of <see cref="F:Microsoft.CodeAnalysis.GreenNode.SlotCountTooLarge"/>.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.GreenNode.EnumerateNodes">
             <summary>
             Enumerates all green nodes of the tree rooted by this node (including this node).  This includes normal
@@ -31326,6 +31904,35 @@
             if a derived class can implement it more efficiently.
             </remarks>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.GreenNode.NodeFlags">
+            <summary>
+            Special flags a node can have.  Note: while this is typed as being `ushort`, we can only practically use 12
+            of those 16 bits as we use the remaining 4 bits to store the slot count of a node.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlags.IsNotMissing">
+            <summary>
+            If this node is missing or not.  We use a non-zero value for the not-missing case so that this value
+            automatically merges upwards when building parent nodes.  In other words, once we have one node that is
+            not-missing, all nodes above it are definitely not-missing as well.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlags.HasAnnotationsDirectly">
+            <summary>
+            If this node directly has annotations (not its descendants).  <see cref="F:Microsoft.CodeAnalysis.GreenNode.NodeFlags.ContainsAnnotations"/> can be
+            used to determine if a node or any of its descendants has annotations.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlags.ContainsAnnotations">
+            <summary>
+            If this node, or any of its descendants has annotations attached to them.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlags.ContainsAttributes">
+            <summary>
+            If this node, or any of its descendants has attributes attached to it.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.GreenNode.AddError(Microsoft.CodeAnalysis.DiagnosticInfo)">
             <summary>
             Add an error to the given node, creating a new node that is the same except it has no parent,
@@ -31335,6 +31942,32 @@
             <returns>A new node, with no parent, that has this error added to it.</returns>
             <remarks>Since nodes are immutable, the only way to create nodes with errors attached is to create a node without an error,
             then add an error with this method to create another node.</remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount">
+            <summary>
+            Combination of <see cref="P:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount.NodeFlags"/> and <see cref="P:Microsoft.CodeAnalysis.GreenNode.SlotCount"/> stored in a single 16bit value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount.SlotCountMask">
+            <summary>
+            4 bits for the SlotCount.  This allows slot counts of 0-14 to be stored as a direct byte.  All 1s
+            indicates that the slot count must be computed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount._data">
+            <summary>
+            12 bits for the NodeFlags.  This allows for up to 12 distinct bits to be stored to designate interesting
+            aspects of a node.
+            </summary>
+            <summary>
+            CCCCFFFFFFFFFFFF for Count bits then Flag bits.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.GreenNode.NodeFlagsAndSlotCount.SmallSlotCount">
+            <summary>
+            Returns the slot count if it was small enough to be stored directly in this object.  Otherwise, returns
+            <see cref="F:Microsoft.CodeAnalysis.GreenNode.SlotCountTooLarge"/> to indicate it could not be directly stored.
+            </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.ICompilationUnitSyntax">
              <summary>
@@ -38517,6 +39150,19 @@
             The data of the resource.
             </summary>
         </member>
+        <member name="M:Microsoft.Cci.PooledBlobBuilder.GetInstance(System.Boolean)">
+             <summary>
+             Get a new instance of the <see cref="T:System.Reflection.Metadata.BlobBuilder"/> that has <see cref="P:System.Reflection.Metadata.BlobBuilder.ChunkCapacity"/> of
+             at least <see cref="F:Microsoft.Cci.PooledBlobBuilder.PoolChunkSize"/>
+             </summary>
+             <param name="zero">When true force zero out the backing buffer</param>
+             <remarks>
+             The <paramref name="zero"/> can be removed when moving to SRM 9.0 if it contains the bug fix for
+             <see cref="M:System.Reflection.Metadata.BlobBuilder.ReserveBytes(System.Int32)"/>
+            
+             https://github.com/dotnet/runtime/issues/99244
+             </remarks>
+        </member>
         <member name="F:Microsoft.Cci.ReferenceIndexerBase.typeReferenceNeedsToken">
             <summary>
             Set true before a type reference is visited but only if a token needs to be created for the type reference.
@@ -39254,28 +39900,10 @@
             Represents a single using directive (Imports clause).
             </summary>
         </member>
-        <member name="M:Roslyn.Utilities.AssemblyUtilities.FindAssemblySet(System.String)">
+        <member name="T:Roslyn.Utilities.AssemblyUtilities">
             <summary>
-            Given a path to an assembly, identifies files in the same directory
-            that could satisfy the assembly's dependencies. May throw.
+            This partial contains methods that must be shared by source with the workspaces layer
             </summary>
-            <remarks>
-            Dependencies are identified by simply checking the name of an assembly
-            reference against a file name; if they match the file is considered a
-            dependency. Other factors, such as version, culture, public key, etc., 
-            are not considered, and so the returned collection may include items that
-            cannot in fact satisfy the original assembly's dependencies.
-            </remarks>
-            <exception cref="T:System.IO.IOException">If the file at <paramref name="filePath"/> does not exist or cannot be accessed.</exception>
-            <exception cref="T:System.BadImageFormatException">If the file is not an assembly or is somehow corrupted.</exception>
-        </member>
-        <member name="M:Roslyn.Utilities.AssemblyUtilities.ReadMvid(System.String)">
-            <summary>
-            Given a path to an assembly, returns its MVID (Module Version ID).
-            May throw.
-            </summary>
-            <exception cref="T:System.IO.IOException">If the file at <paramref name="filePath"/> does not exist or cannot be accessed.</exception>
-            <exception cref="T:System.BadImageFormatException">If the file is not an assembly or is somehow corrupted.</exception>
         </member>
         <member name="M:Roslyn.Utilities.AssemblyUtilities.FindSatelliteAssemblies(System.String)">
             <summary>
@@ -39299,6 +39927,14 @@
              May throw.
             </summary>
             <exception cref="T:System.IO.IOException">If the file at <paramref name="assemblyPath"/> does not exist or cannot be accessed.</exception>
+            <exception cref="T:System.BadImageFormatException">If the file is not an assembly or is somehow corrupted.</exception>
+        </member>
+        <member name="M:Roslyn.Utilities.AssemblyUtilities.ReadMvid(System.String)">
+            <summary>
+            Given a path to an assembly, returns its MVID (Module Version ID).
+            May throw.
+            </summary>
+            <exception cref="T:System.IO.IOException">If the file at <paramref name="filePath"/> does not exist or cannot be accessed.</exception>
             <exception cref="T:System.BadImageFormatException">If the file is not an assembly or is somehow corrupted.</exception>
         </member>
         <member name="F:Roslyn.Utilities.FileKey.FullPath">
@@ -40909,6 +41545,155 @@
         <member name="T:System.Linq.ImmutableSegmentedListExtensions">
             <seealso cref="T:System.Linq.ImmutableArrayExtensions"/>
         </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
+            <summary>
+             Indicates that an API is experimental and it may change in the future.
+            </summary>
+            <remarks>
+              This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
+              feature is used. Authors can use this attribute to ship preview features in their assemblies.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.#ctor(System.String)">
+            <summary>
+             Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute"/> class, specifying the ID that the compiler will use
+             when reporting a use of the API the attribute applies to.
+            </summary>
+            <param name="diagnosticId">The ID that the compiler will use when reporting a use of the API the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId">
+            <summary>
+             Gets the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <value>The unique diagnostic ID.</value>
+            <remarks>
+             The diagnostic ID is shown in build output for warnings and errors.
+             <para>This property represents the unique ID that can be used to suppress the warnings or errors, if needed.</para>
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat">
+            <summary>
+             Gets or sets the URL for corresponding documentation.
+             The API accepts a format string instead of an actual URL, creating a generic URL that includes the diagnostic ID.
+            </summary>
+            <value>The format string that represents a URL to corresponding documentation.</value>
+            <remarks>An example format string is <c>https://contoso.com/obsoletion-warnings/{0}</c>.</remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with a field or property member.</summary>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type, and callers
+            do not need to set any required members themselves.
+            </summary>
+        </member>
         <member name="T:System.Index">
             <summary>Represent a type can be used to index a collection either from the start or the end.</summary>
             <remarks>
@@ -41034,121 +41819,6 @@
             <param name="other">The collection to compare to the current set.</param>
             <returns><see langword="true" /> if the current set is equal to other; otherwise, <see langword="false" />.</returns>
             <exception cref="T:System.ArgumentNullException">other is <see langword="null" />.</exception>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
-            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
-            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
-            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
-            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
-            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified return value condition.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter may be null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
-            <summary>Gets the return value condition.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
-            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified return value condition.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter will not be null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
-            <summary>Gets the return value condition.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
-            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
-            <summary>Initializes the attribute with the associated parameter name.</summary>
-            <param name="parameterName">
-            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
-            <summary>Gets the associated parameter name.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
-            <summary>Applied to a method that will never return under any circumstance.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
-            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified parameter value.</summary>
-            <param name="parameterValue">
-            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
-            the associated parameter matches this value.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
-            <summary>Gets the condition parameter value.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
-            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
-            <summary>Initializes the attribute with a field or property member.</summary>
-            <param name="member">
-            The field or property member that is promised to be not-null.
-            </param>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
-            <summary>Initializes the attribute with the list of field and property members.</summary>
-            <param name="members">
-            The list of field and property members that are promised to be not-null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
-            <summary>Gets field or property member names.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
-            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
-            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter will not be null.
-            </param>
-            <param name="member">
-            The field or property member that is promised to be not-null.
-            </param>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
-            <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter will not be null.
-            </param>
-            <param name="members">
-            The list of field and property members that are promised to be not-null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
-            <summary>Gets the return value condition.</summary>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
-            <summary>Gets field or property member names.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
-            <summary>
-            Specifies that this constructor sets all required members for the current type, and callers
-            do not need to set any required members themselves.
-            </summary>
         </member>
         <member name="T:System.Range">
             <summary>Represent a range has start and end indexes.</summary>
