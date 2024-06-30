@@ -3,7 +3,6 @@ D:\dev\WorldBoxModLoader\bin\Debug\WorldBoxModLoader.dll
 D:\dev\WorldBoxModLoader\bin\Debug\WorldBoxModLoader.pdb
 D:\dev\WorldBoxModLoader\bin\Debug\AppStoreSettings.dll
 D:\dev\WorldBoxModLoader\bin\Debug\Assembly-CSharp-firstpass.dll
-D:\dev\WorldBoxModLoader\bin\Debug\Assembly-CSharp.dll
 D:\dev\WorldBoxModLoader\bin\Debug\AWSSDK.S3.dll
 D:\dev\WorldBoxModLoader\bin\Debug\C5.dll
 D:\dev\WorldBoxModLoader\bin\Debug\DOTween.dll
@@ -157,3 +156,4 @@ D:\dev\WorldBoxModLoader\bin\Debug\System.Security.Principal.Windows.dll
 D:\dev\WorldBoxModLoader\bin\Debug\Microsoft.Win32.Registry.xml
 D:\dev\WorldBoxModLoader\bin\Debug\System.Security.AccessControl.xml
 D:\dev\WorldBoxModLoader\bin\Debug\System.Security.Principal.Windows.xml
+D:\dev\WorldBoxModLoader\bin\Debug\Assembly-CSharp.dll
