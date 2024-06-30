@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,18 +13,14 @@ namespace WorldBoxModLoader
     internal sealed class ModCompiler
     {
         public static List<ModConstants> CompiledMods { get; private set; } = new List<ModConstants>();
-        public static string worldBoxDirectory;
-        public static string worldBoxDataDirectory;
         private static List<string> defaultReferences = new List<string>();
 
         public static void Awake()
         {
-            worldBoxDataDirectory = Application.dataPath;
-            worldBoxDirectory = Path.GetDirectoryName(worldBoxDataDirectory);
-            defaultReferences = Directory.GetFiles(worldBoxDataDirectory + @"\Managed\", "*.dll").ToList();
-            defaultReferences.Add(Path.GetFullPath(worldBoxDataDirectory + "\\StreamingAssets\\mods\\WorldBoxModLoader.dll"));
-            var modsDir = worldBoxDirectory + "\\Mods";
-            var compilationsDir = worldBoxDirectory + "\\ModCompilations";
+            defaultReferences = Directory.GetFiles(Paths.WorldBoxManagedPath, "*.dll").ToList();
+            defaultReferences.Add(Path.GetFullPath(Application.streamingAssetsPath + "\\mods\\WorldBoxModLoader.dll"));
+            var modsDir = Paths.WorldBoxPath + "\\Mods";
+            var compilationsDir = Paths.WorldBoxPath + "\\ModCompilations";
 
             if (!Directory.Exists(modsDir))
                 Directory.CreateDirectory(modsDir);

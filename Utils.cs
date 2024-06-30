@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using WorldBoxModLoader.ModAPI;
 using Object = UnityEngine.Object;
 
@@ -80,6 +79,7 @@ namespace WorldBoxModLoader
             PowerButton button = Object.Instantiate(prefab);
             ModPowerButton mbutton = button.gameObject.AddComponent<ModPowerButton>();
             TipButton tipButton = button.gameObject.GetOrAddComponent<TipButton>();
+            LocalizedTextManager.add(description, description);
 
             tipButton.textOnClick = buttonId;
             tipButton.textOnClickDescription = description;

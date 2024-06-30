@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 using Object = UnityEngine.Object;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 using Image = UnityEngine.UI.Image;
 
 namespace WorldBoxModLoader
@@ -100,6 +99,7 @@ namespace WorldBoxModLoader
                 PowerButton prefab = UtilsInternal.FindResource<PowerButton>("worldlaws");
                 PowerButton button = Object.Instantiate(prefab);
                 TipButton tipButton = button.gameObject.GetOrAddComponent<TipButton>();
+                LocalizedTextManager.add(buttonDescription, buttonDescription);
 
                 tipButton.textOnClick = buttonId;
                 tipButton.textOnClickDescription = buttonDescription;
@@ -132,16 +132,22 @@ namespace WorldBoxModLoader
             {
                 ScrollWindow window = Object.Instantiate(Resources.Load<ScrollWindow>("windows/empty"),
                     CanvasMain.instance.transformWindows);
+                LocalizedTextManager.add(windowTitleKey, windowTitleKey);
+                window.titleText.text = windowTitleKey;
                 window.screen_id = windowID;
                 window.name = windowID;
 
                 return window;
             }
-            public static PowerButton CreateWindowButton([NotNull] string buttonId, [NotNull] string windowId, Sprite buttonIcon)
+            public static PowerButton CreateWindowButton([NotNull] string buttonId, [NotNull] string windowId, Sprite buttonIcon, string buttonDescription = "")
             {
                 PowerButton prefab = UtilsInternal.FindResource<PowerButton>("worldlaws");
                 PowerButton button = Object.Instantiate(prefab);
+                TipButton tipButton = button.gameObject.GetOrAddComponent<TipButton>();
+                LocalizedTextManager.add(buttonDescription, buttonDescription);
 
+                tipButton.textOnClick = buttonId;
+                tipButton.textOnClickDescription = buttonDescription;
                 button.name = buttonId;
                 button.icon.sprite = buttonIcon;
                 button.open_window_id = windowId;
