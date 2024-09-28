@@ -17,6 +17,13 @@ namespace WorldBoxModLoader
         public static readonly string WBMLAssembliesPath = Combine(WBMLPath, "Assemblies");
         public static readonly string WBMLResourcesPath = Combine(WBMLPath, "Resources");
         public static readonly string PublicizedAssemblyPath = Combine(WBMLAssembliesPath, "Assembly-CSharp-Publicized.dll");
+        public static readonly string ModsPath = Combine(WorldBoxPath, "Mods");
+        public static readonly string CompilationsPath = Combine(WorldBoxPath, "ModCompilations");
+        public static readonly string SteamappsCommonPath = Path.GetDirectoryName(WorldBoxPath);
+        public static readonly string SteamappsPath = Path.GetDirectoryName(SteamappsCommonPath);
+        public static readonly string SteamappsWorkshopPath = Combine(SteamappsPath, "workshop");
+        public static readonly string SteamappsWorkshopContentPath = Combine(SteamappsWorkshopPath, "content");
+        public static readonly string SubscribedModsPath = Combine(SteamappsWorkshopContentPath, "1206560");
 
         private static string Combine(params string[] paths) => new FileInfo(paths.Aggregate("", Path.Combine)).FullName;
     }
