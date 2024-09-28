@@ -16,6 +16,7 @@ namespace WorldBoxModLoader
 
         public static void Provide(string modDirectory, out ModConstants modConstantsObject)
         {
+            Debug.Log("Providing " + modDirectory + "mod.json");
             string jsonFile = File.ReadAllText(modDirectory + "mod.json");
             modConstantsObject = JsonConvert.DeserializeObject<ModConstants>(jsonFile);
         }

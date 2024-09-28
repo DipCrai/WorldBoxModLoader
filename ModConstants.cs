@@ -14,5 +14,8 @@ namespace WorldBoxModLoader
         public bool Enabled { get; set; }
         public string MetaLocation { get; set; }
         public string MetaPath { get; set; }
+        public ulong ModID { get; set; }
+        public bool ShouldPublish { get; set; }
+        public bool ShouldUpdate { get; set; }
     }
 }

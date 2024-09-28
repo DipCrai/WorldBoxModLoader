@@ -1,0 +1,172 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\dev\\WorldBoxModLoader\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|d:\\dev\\worldboxmodloader\\usermodpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:usermodpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\modconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:modconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\modloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:modloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\modcompiler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:modcompiler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\worldboxmod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:worldboxmod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\modpowerbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:modpowerbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|D:\\dev\\WorldBoxModLoader\\modapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E20AFCBD-7170-45F3-B7D9-740A87F16B3B}|WorldBoxModLoader.csproj|solutionrelative:modapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ModConstants.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\ModConstants.cs",
+              "RelativeDocumentMoniker": "ModConstants.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\ModConstants.cs",
+              "RelativeToolTip": "ModConstants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-08T20:31:37.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserModPublisher.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\UserModPublisher.cs",
+              "RelativeDocumentMoniker": "UserModPublisher.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\UserModPublisher.cs",
+              "RelativeToolTip": "UserModPublisher.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAE0AAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-28T10:38:33.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ModPowerButton.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\ModPowerButton.cs",
+              "RelativeDocumentMoniker": "ModPowerButton.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\ModPowerButton.cs",
+              "RelativeToolTip": "ModPowerButton.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T13:12:07.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WorldBoxMod.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\WorldBoxMod.cs",
+              "RelativeDocumentMoniker": "WorldBoxMod.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\WorldBoxMod.cs",
+              "RelativeToolTip": "WorldBoxMod.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T20:21:01.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Paths.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\Paths.cs",
+              "RelativeDocumentMoniker": "Paths.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\Paths.cs",
+              "RelativeToolTip": "Paths.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAABsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-21T12:04:13.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ModAPI.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\ModAPI.cs",
+              "RelativeDocumentMoniker": "ModAPI.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\ModAPI.cs",
+              "RelativeToolTip": "ModAPI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIkAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-08T20:31:37.819Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Utils.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\Utils.cs",
+              "RelativeDocumentMoniker": "Utils.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\Utils.cs",
+              "RelativeToolTip": "Utils.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBQAAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T20:36:40.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ModLoader.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\ModLoader.cs",
+              "RelativeDocumentMoniker": "ModLoader.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\ModLoader.cs",
+              "RelativeToolTip": "ModLoader.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwCMAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-08T20:31:37.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ModCompiler.cs",
+              "DocumentMoniker": "D:\\dev\\WorldBoxModLoader\\ModCompiler.cs",
+              "RelativeDocumentMoniker": "ModCompiler.cs",
+              "ToolTip": "D:\\dev\\WorldBoxModLoader\\ModCompiler.cs",
+              "RelativeToolTip": "ModCompiler.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAqwDMAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-23T23:41:39.053Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

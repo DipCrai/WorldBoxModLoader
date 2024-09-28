@@ -62,6 +62,16 @@ namespace WorldBoxModLoader
                 Directory.CreateDirectory(Paths.WBMLAssembliesPath);
             }
 
+            if (!Directory.Exists(Paths.ModsPath))
+            {
+                Directory.CreateDirectory(Paths.ModsPath);
+            }
+
+            if (!Directory.Exists(Paths.CompilationsPath))
+            {
+                Directory.CreateDirectory(Paths.CompilationsPath);
+            }
+
             ExtractAssemblies();
             LoadAssemblies();
 

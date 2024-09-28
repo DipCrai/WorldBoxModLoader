@@ -56,6 +56,7 @@
     <Compile Include="ModPowerButton.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserModPublisher.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="WorldBoxMod.cs" />
   </ItemGroup>

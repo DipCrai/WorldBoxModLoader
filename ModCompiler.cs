@@ -19,15 +19,10 @@ namespace WorldBoxModLoader
         {
             defaultReferences = Directory.GetFiles(Paths.WorldBoxManagedPath, "*.dll").ToList();
             defaultReferences.Add(Path.GetFullPath(Application.streamingAssetsPath + "\\mods\\WorldBoxModLoader.dll"));
-            var modsDir = Paths.WorldBoxPath + "\\Mods";
-            var compilationsDir = Paths.WorldBoxPath + "\\ModCompilations";
 
-            if (!Directory.Exists(modsDir))
-                Directory.CreateDirectory(modsDir);
-            if (!Directory.Exists(compilationsDir))
-                Directory.CreateDirectory(compilationsDir);
+            string[] modDirectories = Directory.GetDirectories(Paths.ModsPath);
+            modDirectories = modDirectories.Concat(Directory.GetDirectories(Paths.SubscribedModsPath)).ToArray();
 
-            string[] modDirectories = Directory.GetDirectories(modsDir);
             if (modDirectories.Length == 0)
                 return;
 
@@ -36,14 +31,29 @@ namespace WorldBoxModLoader
                 string newModDirectory = modDirectory + @"\";
                 ///may be realisation withput ModConstants.Scripts
                 ///Debug.Log(Directory.GetFiles(newModDirectory, "*.cs").Length);
-                string outputPath = CompileMod(newModDirectory);
-                if (!string.IsNullOrEmpty(outputPath))
+                if (File.Exists(newModDirectory + "mod.json"))
                 {
-                    UtilsInternal.Provide(newModDirectory, out ModConstants modConstants);
-                    modConstants.MetaLocation = newModDirectory;
-                    modConstants.MetaPath = outputPath;
-                    UtilsInternal.UpdateModJson(newModDirectory, modConstants);
-                    CompiledMods.Add(modConstants);
+                    Debug.LogWarning(newModDirectory);
+                    string outputPath = CompileMod(newModDirectory);
+                    if (!string.IsNullOrEmpty(outputPath))
+                    {
+                        UtilsInternal.Provide(newModDirectory, out ModConstants modConstants);
+                        modConstants.MetaLocation = newModDirectory;
+                        modConstants.MetaPath = outputPath;
+                        UtilsInternal.UpdateModJson(newModDirectory, modConstants);
+                        CompiledMods.Add(modConstants);
+
+                        if (modConstants.ShouldPublish)
+                        {
+                            UserModPublisher.Publish(modConstants);
+                        }
+                        if (modConstants.ShouldUpdate)
+                        {
+                            UserModPublisher.Update(modConstants);
+                        }
+                    }
+                    else
+                        continue;
                 }
                 else
                     continue;
@@ -55,14 +65,14 @@ namespace WorldBoxModLoader
             List<MetadataReference> metadataReferences = new List<MetadataReference>();
             List<SyntaxTree> syntaxTreeList = new List<SyntaxTree>();
             List<string> sources = new List<string>();
-
+            
             UtilsInternal.Provide(modDirectory, out ModConstants modConstants);
             var scripts = modConstants.Scripts;
             var author = modConstants.Author;
             var modName = modConstants.ModName;
             var version = modConstants.Version;
-            var enabled = modConstants.Enabled;
 
+            Debug.LogWarning($"{author} {modName} {version}");
             foreach (string script in scripts)
             {
                 string fullPath = Path.GetFullPath(modDirectory + script.Replace("/", @"\"));
